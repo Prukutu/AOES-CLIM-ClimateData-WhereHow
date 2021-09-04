@@ -1,13 +1,15 @@
 ---
 title: "Where to get Climate Datasets"
-teaching: 0
-exercises: 0
+teaching: 15
+exercises: 5
 questions:
 - "Where do I find Climate Datasets?"
 objectives:
-- ""
+- "Learning to find climate datasets on the web"
+- "How and where to download a dataset from the web"
+- "How to be a good citizen of `/homes`"
 keypoints:
-- ""
+- "Don't download big datasets to your `/homes` directory!"
 ---
 
 ### Where can I find Climate Datasets?
@@ -18,7 +20,7 @@ Many climate datasets are available on the COLA servers, but how do I find this 
 Not everything is there yet, but this is a good place to start if you want to know what data are available locally.
 
 2. [NOAA/Physical Sciences Lab](https://psl.noaa.gov/data/gridded/)
-Many climate datasets are here with lots of information and searching capabilities.  This is my go-to for finding climate datasets.
+Many climate datasets are here with lots of information and searching capabilities.
 
 3. [IRI/LDEO Climate Data Library](https://iridl.ldeo.columbia.edu/index.html?Set-Language=en)
 This is another great resource for finding Climate Datasets
@@ -27,7 +29,7 @@ This is another great resource for finding Climate Datasets
 Great resource for getting expert advice on which datasets you should use for your specific application
 
 
-### Where shoild I put Climate Datasets?
+### Where should I put Climate Datasets?
 
 There are two main ways to access and use climate datasets that are available on the web.
 
@@ -47,19 +49,19 @@ Thus, there is a decision to be made depending on your situation - one or the ot
 >
 > If you choose to download data sets to the COLA servers, **do not store them in your home directory!!**
 > The `/homes` disk is a limited, shared and <u>critical</u> resource among all users. 
-> If you fill up the `/homes` disk by downloading too many large datasets there, no one will be able to use system!
+> If you fill up the `/homes` disk by downloading too many large datasets there, the system will stop working and no one will be able to use it!
 > 
 > There are three categories of disks, denoted by three different top-level directories, where large datasets should be stored:
 > 
 > 1. `/scratch` - for temporary or non-critial data. This disk is not backed up, and old files may be scrubbed (deleted) if the disk becomes full.
 > 
 > 2. `/project` - for most working datasets. Each research project at COLA may have one or more project disks. 
-> These disks are periodically backed up to tape, so they can be restored if there is a hardware failure or other problem.
+> These disks are regularly backed up to tape, so they can be restored if there is a hardware failure or other problem.
 > Check with your advisor for access to project disks relevant to your use. 
 > 
-> 3. `/shared` - for long-term, non-volitile datasets. These disks are where "final versions" of datasets are kept. 
+> 3. `/shared` - for long-term, non-volatile datasets. These disks are where "final versions" of datasets are kept. 
 > These may be datasets downloaded from sources like those above, that are deemed essential enough to have local copies, 
-> or datasets produced by COLA scientists. Only new files get backed up, and it is assumed they will be rarely if ever changed once placed here.
+> or datasets produced by COLA scientists. Only new files get backed up, and it is expected they will be rarely if ever changed once placed here.
 > 
 {: .callout}
 
@@ -83,7 +85,7 @@ At one of the data repository websites listed above, let's find a dataset to dow
 <a href="https://psl.noaa.gov/data/gridded/data.noaa.ersst.v5.html">NOAA Extended Reconstructed SST V5</a>.
 There you will find a web page with a nice description of the dataset.
 
-In the section called "Download/Plot Data", in the "download file" column you will see two files listed. 
+In the section of the page called "Download/Plot Data", in the "download file" column you will see two files listed. 
 <u>Don't click</u>, but *right-click* on "sst.mon.ltm.1981-2010.nc" and choose "copy link address" to put the URL on your clipboard.
 Then paste the link into your terminal after typing `wget`:
 
@@ -115,7 +117,7 @@ Length: 1159964 (1.1M) (unauthoritative)
 Note that the URL is not `http://` or `https://` but is `ftp://`. `ftp` stands for "file transfer protocol". 
 It is an old, robust but insecure protocol for moving data that works well from web sites because it has an "anonymous" mode that does not require a user to log in to retrieve files. 
 There is a secure version called `sftp` that uses `ssh` and requires passwords. 
-`sftp` is the preferred method for moving files between private sources (e.g. your COLA account and an account you might have at a supercomuting center).
+`sftp` or 'scp' (the secure copy command) are preferred over `ftp` for moving files between private sources (e.g. your COLA account and an account you might have at a supercomuting center).
 
 {% include links.md %}
 
