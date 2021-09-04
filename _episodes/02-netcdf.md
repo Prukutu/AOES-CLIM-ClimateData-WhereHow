@@ -5,6 +5,7 @@ exercises: 0
 questions:
 - "What are the common file formats for Climate Datasets?"
 - "What is NetCDF?"
+- "How can we open and access data in NetCDF files?"
 objectives:
 - "Become familiar with some of the varieties of data formats used for climate data"
 - "Learn how to peruse and parse a NetCDF file"
