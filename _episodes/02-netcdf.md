@@ -182,7 +182,7 @@ plt.contourf(ds['sst'][0,-1::-1,:])
 What does that indexing mean?
 
 
-> ## the question mark, and `<tab><tab>`
+> ### the question mark, and `<tab><tab>`
 >
 > In Python, and particularly in Jupyter Notebooks, there are many sources of help as you are writing code. Two that are especially useful:
 > 
