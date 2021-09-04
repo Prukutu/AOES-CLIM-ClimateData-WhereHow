@@ -94,7 +94,7 @@ $ wget ftp://ftp.cdc.noaa.gov/Datasets/noaa.ersst.v5/sst.mon.ltm.1981-2010.nc
 ~~~
 {: .language-bash}
 
-You will get some text on your screen like the follwing, that reports on the `wget` process:
+You will get some text on your screen like the following, that reports on the `wget` process:
 
 ~~~
 --2021-09-04 14:47:31--  ftp://ftp.cdc.noaa.gov/Datasets/noaa.ersst.v5/sst.mon.ltm.1981-2010.nc
