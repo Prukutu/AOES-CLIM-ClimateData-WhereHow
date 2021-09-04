@@ -110,32 +110,40 @@ import xarray as xr
 ~~~
 {: .language-python}
 
-Note, there is nothing special about the choice of these abbreviations for these three modules - but they happen to be the most commonly used ones by most people. 
+Note: _there is nothing special about the choice of these abbreviations for these three modules_ - but they happen to be the most commonly used ones by most people. 
 You could use any abbreviation you like, or none at all.
 
-You will get some text on your screen like the follwing, that reports on the `wget` process:
+In a new cell, let's define the path to the dataset we downloaded and open it with `xarray`:
 
 ~~~
---2021-09-04 14:47:31--  ftp://ftp.cdc.noaa.gov/Datasets/noaa.ersst.v5/sst.mon.ltm.1981-2010.nc
-           => ‘sst.mon.ltm.1981-2010.nc’
-Resolving ftp.cdc.noaa.gov (ftp.cdc.noaa.gov)... 140.172.38.117
-Connecting to ftp.cdc.noaa.gov (ftp.cdc.noaa.gov)|140.172.38.117|:21... connected.
-Logging in as anonymous ... Logged in!
-==> SYST ... done.    ==> PWD ... done.
-==> TYPE I ... done.  ==> CWD (1) /Datasets/noaa.ersst.v5 ... done.
-==> SIZE sst.mon.ltm.1981-2010.nc ... 1159964
-==> PASV ... done.    ==> RETR sst.mon.ltm.1981-2010.nc ... done.
-Length: 1159964 (1.1M) (unauthoritative)
-
-100%[===================================================================================>] 1,159,964   --.-K/s   in 0.1s    
-
-2021-09-04 14:47:37 (10.8 MB/s) - ‘sst.mon.ltm.1981-2010.nc’ saved [1159964]
+file = "/scratch/<your_username>/sst.mon.ltm.1981-2010.nc"
+ds = xr.open_dataset(file)
 ~~~
-{: .language-bash}
+{: .language-python}
 
-Note that the URL is not `http://` or `https://` but is `ftp://`. `ftp` stands for "file transfer protocol". 
-It is an old, robust but insecure protocol for moving data that works well from web sites because it has an "anonymous" mode that does not require a user to log in to retrieve files. 
-There is a secure version called `sftp` that uses `ssh` and requires passwords. 
-`sftp` or `scp` (the secure copy command) are preferred over `ftp` for moving files between private sources (e.g. your COLA account and an account you might have at a supercomuting center).
+Now query the object name `ds` by typing its name and <return>:
+  
+~~~
+ds
+~~~
+{: .language-python}
+
+You will
+  
+  
+
+> ## the question mark, and <tab><tab>
+>
+> In Python, and particularly in Jupyter Notebooks, there are many sources of help as you are writing code. Two that are especially useful:
+> 
+> * If you place a question mark immediately after an object 
+> (Python is an "object-oriented" programming language, and everything in Python is an "object"),
+> in most cases you will get a brief, helpful description of it. 
+> The degree of detail will vary, but it can help you to keep straight and understand what is what.
+> * If you are typing the name of a function and halfway through you don't quite remember the spelling or syntax, 
+> you can hit the tab twice <tab><tab> and a list of auto-complete options will come up to help you. 
+> You can click on the one you want to finish typing it. 
+>  
+{: .callout}
 
 {% include links.md %}
