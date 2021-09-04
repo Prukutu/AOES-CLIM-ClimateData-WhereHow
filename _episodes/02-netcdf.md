@@ -1,7 +1,7 @@
 ---
 title: "Data File Formats"
-teaching: 15
-exercises: 5
+teaching: 20
+exercises: 0
 questions:
 - "What are the common file formats for Climate Datasets?"
 - "What is NetCDF?
@@ -179,6 +179,7 @@ plt.contourf(ds['sst'][0,-1::-1,:])
 {: .language-python}
 
 What does that indexing mean?
+
 
 > ## the question mark, and `<tab><tab>`
 >
