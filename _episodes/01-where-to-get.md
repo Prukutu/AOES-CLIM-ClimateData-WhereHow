@@ -112,7 +112,7 @@ Length: 1159964 (1.1M) (unauthoritative)
 
 2021-09-04 14:47:37 (10.8 MB/s) - ‘sst.mon.ltm.1981-2010.nc’ saved [1159964]
 ~~~
-{: .language-bash}
+{: .output}
 
 Note that the URL is not `http://` or `https://` but is `ftp://`. `ftp` stands for "file transfer protocol". 
 It is an old, robust but insecure protocol for moving data that works well from web sites because it has an "anonymous" mode that does not require a user to log in to retrieve files. 
