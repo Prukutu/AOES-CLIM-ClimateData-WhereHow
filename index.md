@@ -8,9 +8,4 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 
 {% comment %} This is a comment in Liquid {% endcomment %}
 
-> ## Prerequisites
->
-> FIXME
-{: .prereq}
-
 {% include links.md %}
