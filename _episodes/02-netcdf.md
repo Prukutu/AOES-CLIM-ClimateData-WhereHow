@@ -121,18 +121,66 @@ ds = xr.open_dataset(file)
 ~~~
 {: .language-python}
 
-Now query the object name `ds` by typing its name and <return>:
+Now query the object name `ds` by typing its name and `<return>`:
   
 ~~~
 ds
 ~~~
 {: .language-python}
 
-You will
-  
-  
+You will get something that looks much like the result of `ncdump -h`, but even more helpful. 
+You will also be able to view the contents of any variable, and expand/contract a view of any attributes.
+For very large or multi-file datasets (`xr.open_mfdataset()` can open multiple files at once and link them together in a single object),
+You will also be shown how the data are "chunked" - i.e., organized when loaded into computer memory.
 
-> ## the question mark, and <tab><tab>
+Next, let's make a plot of the data. To access the variable `sst` in `ds`, we can either say:
+~~~
+ds.sst
+~~~
+{: .language-python}
+
+...or...
+
+~~~
+ds['sst']
+~~~
+{: .language-python}
+
+The latter is more flexible and also makes it clear that `ds` is not a module with a function called `sst` -- it is less confusing for a human to read.
+
+You can see that the _dump_ of `ds['sst']` shows more focused information, and a sample of the data in the arrays.
+There are 3 dimensions: time, latitude and longitude (in that sequence - the sequence is important!). 
+To make a 2-D plot, we will choose the first (0th) time step: 
+
+~~~
+plt.contourf(ds['sst'][0,:,:])
+~~~
+{: .language-python}
+
+Things to note:
+1. `contourf` is one of the many plotting funtions of [matplotlib.pyplot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.html), 
+and especially good for plotting gridded environmental data. 
+2. The `[0,:,:]` contruct tells what to do with each dimension of `ds['sst']` in order: [time,lat,lon]. 
+  * An integer (or variable containing an integer) specifies one index value for that dimension.
+  * A : by itself means the entire range.
+  * Sub-ranges are specified with a mix of integers and colons, e.g.: `1:` means all but the 0th element, 
+    `2:5` would include elements 2-4 (remember it is "up to but not including" the last number).
+  * A second colon could be used to indicate the step, e.g., :10:2 would include elements 0,2,4,6,8 (but not 10).
+3. The map is upside down! That is because although there are latitudes and longitudes 
+associated with the last two dimensions of the array, we did not convey that information to the plotting function. 
+Thus, it treats it like a mathematical array with the origin at the lower left. 
+We can also see that the axes are labeled by the indices and not latitudes and longitudes.
+
+We could flip the plot over by changing the indexing of the latitude dimension:
+
+~~~
+plt.contourf(ds['sst'][0,-1::-1,:])
+~~~
+{: .language-python}
+
+What does that indexing mean?
+
+> ## the question mark, and `<tab><tab>`
 >
 > In Python, and particularly in Jupyter Notebooks, there are many sources of help as you are writing code. Two that are especially useful:
 > 
