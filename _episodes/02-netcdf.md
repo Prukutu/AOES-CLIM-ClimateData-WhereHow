@@ -10,6 +10,7 @@ objectives:
 - "Learn how to peruse and parse a NetCDF file"
 - "Introduction to `xarray`"
 keypoints:
+- "NetCDF is now the most common climate data format."
 - "`xarray` wants to be your best friend - let it!"
 ---
 
@@ -21,7 +22,7 @@ There are many data formats in use in the field of climate research, but there a
 The Network Common Data Form (originally called the Network Climate Data Format). Typical suffixes: `.nc`, `.nc4`. 
 This binary format was developed by the climate community, but has been adopted in many other communities due to its utility and self-describing format
 (i.e., the data file also includes metadata to describe the contents, its spatial, temporal and any other dimensions, properties and attributes). 
-Beginning with version 4, data compression has become an option.
+Beginning with version 4, data compression has become an option. It has become the most common format for climate data files.
 
 2. [GRIB](https://climatedataguide.ucar.edu/climate-data-tools-and-analysis/grib):
 GRIdded Binary format. Typical suffix: `grb`. 
