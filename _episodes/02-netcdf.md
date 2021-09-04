@@ -1,10 +1,10 @@
 ---
 title: "Data File Formats"
-teaching: 20
+teaching: 25
 exercises: 0
 questions:
 - "What are the common file formats for Climate Datasets?"
-- "What is NetCDF?
+- "What is NetCDF?"
 objectives:
 - "Become familiar with some of the varieties of data formats used for climate data"
 - "Learn how to peruse and parse a NetCDF file"
