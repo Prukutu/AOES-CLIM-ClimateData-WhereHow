@@ -72,7 +72,7 @@ $ ncdump -h sst.mon.ltm.1981-2010.nc
 A lot of text is sent to your screen, starting with a list of the `dimensions` of the dataset in the file, then the
 `variables` including a listing of the attributes of each variable, and finally the `attributes` of the dataset itself (global attributes).
 
-> ## NetCDF metadata
+> ### NetCDF metadata
 >
 > The `ncdump -h` command lists metadata in a human-readable format that is fairly easy to interpret.
 >
@@ -82,7 +82,7 @@ A lot of text is sent to your screen, starting with a list of the `dimensions` o
 > 3. The data variables (the ones that vary in both space and time dimensions)
 > 4. What is this a dataset of? (peruse the "global attributes")
 >
-> > ## Solution
+> > ### Solution
 > > 1. lon = 180; lat = 89; time = 12; nbnds = 2
 > > 2. lon is longitude (˚E); lat is latitude (˚N); time is months (although that is not terribly obvious from the metadata); nbnds is time boundaries (also a bit mysterious at this point)
 > > 3. sst is sea surface temperature [˚C]; valid_yr_count is the "count of non-missing values used in mean", i.e., number of years of good data used.
@@ -182,7 +182,7 @@ plt.contourf(ds['sst'][0,-1::-1,:])
 What does that indexing mean?
 
 
-> ### the question mark, and `<tab><tab>`
+> ### The question mark, and `<tab><tab>`
 >
 > In Python, and particularly in Jupyter Notebooks, there are many sources of help as you are writing code. Two that are especially useful:
 > 
