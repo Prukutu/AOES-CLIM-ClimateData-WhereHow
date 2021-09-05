@@ -1,5 +1,5 @@
 ---
-title: "OpenDap and GRIB"
+title: "OPeNDAP and GRIB"
 teaching: 20
 exercises: 0
 questions:
@@ -9,7 +9,8 @@ objectives:
 - "Learn how to use `xarray` to read remote datasets"
 - "Learn how to use `xarray` to read GRIB files"
 keypoints:
-- "`xarray` renders differences between local and remote data, different data file foremats nearly imperceptable."
+- "OPeNDAP allows remote access to datasets across the Internet without downloading files."
+- "`xarray` renders differences between local and remote data, and between different data file formats nearly imperceptable."
 ---
 
 ### OPeNDAP
