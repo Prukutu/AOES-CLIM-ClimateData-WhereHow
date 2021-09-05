@@ -20,7 +20,7 @@ Opening a remote file via OPeNDAP is as easy as opening a file on local disk, ex
 Regardless of the native data file format, OPeNDAP presents it to the client software in a NetCDF-style format.
 
 When a file is opened via OPeNDAP, only the metadata is initially passed to the client. 
-Only the specific slices of variables used in a calculation are passed over the Internet, not the entire dataset.
+Just the specific slices of variables used in a calculation are sent over the Internet, not the entire dataset.
 Thus, it can be much more efficient than downloading a large dataset and only using a small part of it.
 However, performance of code using OPeNDAP depends on the speed of the Internet connection to the data server.
 
@@ -44,8 +44,6 @@ This probably took a few seconds, whereas opening the local file was nearly inst
 There was some communication over the Internet to establish a link between your Python process 
 running in a Jupyter Notebook on the COLA computer and the remote data server (which sits in Boulder, Colorado).
 
-In a new cell, let's define the path to the dataset we downloaded and open it with `xarray`:
-
 As before, query the new object `dd` by typing its name and `<return>`:
   
 ~~~
@@ -56,6 +54,8 @@ dd
 In the same format as before you will see the metadata pertinent to this dataset.
 There is only one data variable, the horizontal resolution is a bit lower 
 (the spatial dimensions of the arrays are smaller) but the time dimension is much larger.
+
+![Screendump of view of metadata from PDSI dataset](../fig/dai_meta.jpg)
 
 The dimensions of this data are again in the order: `[time, lat, lon]` (always check before you move forward!), 
 so we may make a quick plot of this data. This time, let's plot the last time step:
@@ -111,6 +111,8 @@ Examine the file's metadata:
 dg
 ~~~
 {: .language-python}
+
+![Screendump of view of metadata from Era-Interim dataset](../fig/ei_meta.jpg)
 
 Note that here we again have 3 dimensions, but time is not one of them. 
 These are global grids at a single date/time, but across 37 pressure levels (the coordinate `isobaricInhPa`)
