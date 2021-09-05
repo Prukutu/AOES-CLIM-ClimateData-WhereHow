@@ -180,7 +180,11 @@ plt.contourf(ds['sst'][0,-1::-1,:])
 ~~~
 {: .language-python}
 
-What does that indexing mean?
+What does that indexing mean? 
+* The first `-1` means the last element in the latitude dimension. 
+Negative indices are a shortcut to counting from the back instead of the front. 
+The next-to-last element would be -2, etc.
+* The second `-1` is the step. `-1::-1` means start at the back and count toward the front (in this case, start in the south and count north) by ones.
 
 
 > ### The question mark, and `<tab><tab>`
