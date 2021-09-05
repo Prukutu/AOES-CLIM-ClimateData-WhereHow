@@ -1,6 +1,6 @@
 ---
 title: "Data File Formats"
-teaching: 25
+teaching: 30
 exercises: 0
 questions:
 - "What are the common file formats for Climate Datasets?"
