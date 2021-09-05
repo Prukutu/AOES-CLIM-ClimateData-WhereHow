@@ -131,6 +131,9 @@ ds
 {: .language-python}
 
 You will get something that looks much like the result of `ncdump -h`, but even more helpful. 
+
+![Screendump of view of metadata from the SST dataset](../fig/sst_meta.jpg)
+
 You will also be able to view the contents of any variable, and expand/contract a view of any attributes.
 For very large or multi-file datasets (`xr.open_mfdataset()` can open multiple files at once and link them together in a single object),
 You will also be shown how the data are "chunked" - i.e., organized when loaded into computer memory.
