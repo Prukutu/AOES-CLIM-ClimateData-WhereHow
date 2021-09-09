@@ -88,7 +88,7 @@ Let's go back to our terminal window and copy the following file to your scratch
 
 ~~~
 $ cd /scratch/<your_username>
-$ cp /shared/working/rean/era-interim/daily/data/2015/ei.oper.an.pl.regn128cm.2014020800 test.grb
+$ cp /shared/working/rean/era-interim/daily/data/2014/ei.oper.an.pl.regn128cm.2014020800 test.grb
 ~~~
 {: .language-bash}
 
