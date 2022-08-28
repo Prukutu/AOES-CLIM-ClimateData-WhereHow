@@ -129,17 +129,17 @@ It provides a very nice balance between ease-of-use and efficiency when analyzin
 
 Open a new Jupyter Notebook and name it "Plot_netcdf.ipynb".
 
-Before we start, we need to install a bit of software that will help `xarray` interpret the time information in NetCDF files. 
+Before we start, we need to install a bit of software that will help `xarray` interpret all the information in NetCDF files. 
 In the first code cell, type and run the following:
 
 ~~~
-pip install cftime
+pip install cftime netcdf4 pydap
 ~~~
 {: .language-python}
 
-Once it has installed `cftime`, restart your kernel.
+Once it has all installed, restart your kernel.
 
-Yuo can delete that line as `cftime` is now installed in your virtual environment. 
+You can delete that `pip` line as these packages are now installed in your virtual environment and always available. 
 Then, type the following three `import` statements:
 
 ~~~
