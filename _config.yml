@@ -12,6 +12,10 @@ carpentry: "swc"
 # Overall title for pages.
 title: "Climate Data - Where? How?"
 
+# Kramdown
+kramdown:
+  input: Kramdown
+
 # Life cycle stage of the lesson
 # possible values: "pre-alpha", "alpha", "beta", "stable"
 life_cycle: "stable"
