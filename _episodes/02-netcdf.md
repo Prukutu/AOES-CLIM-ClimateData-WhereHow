@@ -15,6 +15,8 @@ keypoints:
 - "`xarray` wants to be your best friend - let it!"
 ---
 
+**Launch a JupyterLab session**
+
 ### Formats of Datasets
 
 There are many data formats in use in the field of climate research, but there are a few that predominate:
@@ -31,7 +33,7 @@ GRIB was developed by the World Meteorological Organization (WMO) as an efficien
 The original format (GRIB1) is only semi-self describing, as it required external look-up tables to decode indices used. 
 GRIB2 is truly self describing. Unlike NetCDF, GRIB allows for tailored compression for each variable in a file.
 
-3. Flat binary files, including those produced as output from FORTRAN programs, and the data files produced by [GrADS](http://cola.gmu.edu/grads/). 
+3. Flat binary files, including those produced as output from FORTRAN programs, and the data files produced by some software packages such as [GrADS](http://cola.gmu.edu/grads/). 
 No standard suffix. Flat binary files contain no metadata, and usually cannot be understood without additional documntation. 
 The native GrADS file format pairs one or more flat binary data files with a "data descriptor file", 
 usually ending with the suffix `.ctl`, that contains all the metadata of a dataset in a human writable and readible form.
@@ -39,6 +41,7 @@ usually ending with the suffix `.ctl`, that contains all the metadata of a datas
 4. ASCII files, which include `.csv` or "comma separated values" files, which are a simple form of storing spreadsheets. 
 ASCII stands for "American Standard Code for Information Interchange", and is the text or "string" format standard for many programming languages.
 ASCII is considered easy to read by humans, but is much less efficient at storing data than binary formats. It is advisable only for small files. 
+  * In this same category is Unicode, which is an extension of ASCII that uses twich the number of bytes per character, and can accomodate a wide range of languages, symbols, even emojis. This is not very commonly used for storing Earth science data except where storing place names needed extended or alternative alphabets, abjads, syllabaries, etc., are needed.
 
 5. Excel files, a spreadsheet format with a wide range of specialized formatting extensions from Microsoft. 
 Typical suffixes: `.xls', `.xlsx` (the latter uses extensible markup language XML to encode metadata information).
@@ -60,22 +63,42 @@ The NCO executables (each function acts like its own Unix command with options a
 can be very handy for doing basic operations on data in the `bash` shell on a Unix system, such as compressing 
 (or "deflating" in NetCDF-speak) a large uncompressed NetCDF dataset you downloaded, in order to conserve disk space.
 
+NCO is available on Hopper as module. To use it, you need to load the module first:
+
+~~~
+$ module load nco
+~~~
+{: .language-bash}
+
 Perhaps the most useful and often used NCO command is `ncdump`. Without options, it will dump the entire contents of a NetCDF file to the screen as
-ASCII numbers and text.  The `-h` option shows only "header" information and not the contents of variables, basically showing you only the metadata. 
+ASCII numbers and text.  The `-h` option shows only "header" information and not the contents of variables, basically showing you only the metadata.
+
+Strangely, this function is not part of the build on Hopper, 
+but its functionality is contained within the versatile command called `ncks` 
+(the `ks` stands for _kitchen sink_, as it contains _everything but the kitchen sink_). 
+For `ncks`, we will use the `-m` flag, which toggles the printing of the metadata for all variables in the file,
+behaving like `ncdump -h`.
 
 Returning to that data file you downloaded to your scratch directory... give it a try:
 
 ~~~
-$ ncdump -h sst.mon.ltm.1981-2010.nc
+$ ncks -m sst.mon.ltm.1981-2010.nc
 ~~~
 {: .language-bash}
 
 A lot of text is sent to your screen, starting with a list of the `dimensions` of the dataset in the file, then the
-`variables` including a listing of the attributes of each variable, and finally the `attributes` of the dataset itself (global attributes).
+`variables` including a listing of the attributes of each variable.
+
+To see the global attributes of the dataset itself also, use the `-M` flag:
+
+~~~
+$ ncks -M sst.mon.ltm.1981-2010.nc
+~~~
+{: .language-bash}
 
 > ### NetCDF metadata
 >
-> The `ncdump -h` command lists metadata in a human-readable format that is fairly easy to interpret.
+> These commands list the metadata in a human-readable format that is fairly easy to interpret.
 >
 > Find the following information:
 > 1. The names of the dimension variables in the dataset and the size of each
@@ -86,14 +109,15 @@ A lot of text is sent to your screen, starting with a list of the `dimensions` o
 > > ### Solution
 > > 1. lon = 180; lat = 89; time = 12; nbnds = 2
 > > 2. lon is longitude (˚E); lat is latitude (˚N); time is months (although that is not terribly obvious from the metadata); nbnds is time boundaries (also a bit mysterious at this point)
-> > 3. sst is sea surface temperature [˚C]; valid_yr_count is the "count of non-missing values used in mean", i.e., number of years of good data used.
-> > 4. A monthly SST climatology averaged over 1971-2010 combining several sources of data. It's called "NOAA Extended Reconstructed SST V5" and there is J. Climate paper describing it.
+> > 3. sst is sea surface temperature [˚C]; valid_yr_count is the "count of non-missing values used in mean", i.e., number of years of good data used from the 30-year window 1991-2020.
+> > 4. A monthly SST climatology averaged over 1991-2020 (the `climatology` attribute has not been properly updated - it still says `1971-2000`) combining several sources of data. It's called "NOAA Extended Reconstructed SST V5" and there is J. Climate paper describing it.
 > {: .solution}
 {: .challenge}
 
 There are other useful software libraries similar to NCO. 
 In particular, there is the [Climate Data Operators (CDO)](https://code.mpimet.mpg.de/projects/cdo/) 
 software package that has much of the same functionality as NCO, but also works with other data formats such as GRIB.
+It also has a module you can load on Hopper.
 
 
 ### Introduction to `xarray`
@@ -103,7 +127,20 @@ To open and use NetCDF datasets in Python, we will use the `xarray` module.
 In particular, `xarray` is built with the `dask` parallel computing library that scales and vectorizes operations on large datasets, making calculations fast and efficient.
 It provides a very nice balance between ease-of-use and efficiency when analyzing climate datasets.
 
-Open a new Jupyter Notebook (name it something like "Plot_netcdf.ipynb") and in the first code cell, type the following three `import` statements
+Open a new Jupyter Notebook and name it "Plot_netcdf.ipynb".
+
+Before we start, we need to install a bit of software that will help `xarray` interpret the time information in NetCDF files. 
+In the first code cell, type and run the following:
+
+~~~
+pip install cftime
+~~~
+{: .language-python}
+
+Once it has installed `cftime`, restart your kernel.
+
+Yuo can delete that line as `cftime` is now installed in your virtual environment. 
+Then, type the following three `import` statements:
 
 ~~~
 import numpy as np
@@ -130,7 +167,7 @@ ds
 ~~~
 {: .language-python}
 
-You will get something that looks much like the result of `ncdump -h`, but even more helpful. 
+You will get something that looks much like the result of `ncks -M`, but even more readible. 
 
 ![Screendump of view of metadata from the SST dataset](../fig/sst_meta.jpg)
 
@@ -151,11 +188,17 @@ ds['sst']
 ~~~
 {: .language-python}
 
-The latter is more flexible and also makes it clear that `ds` is not a module with a function called `sst` -- it is less confusing for a human to read.
+The latter form is more flexible and also makes it clear that `ds` is not a module with a function called `sst` -- it is less confusing for a human to read. Also, the latter form would allow you to specify the variable name `'sst'` as a string variable assigned to that string, which is extremely handy when programming, e.g.:
 
-You can see that the _dump_ of `ds['sst']` shows more focused information, and a sample of the data in the arrays.
+~~~
+variable_name = 'sst'
+ds[variable_name]
+~~~
+{: .language-python}
+
+You can see that the _dump_ of `ds['sst']` shows more focused information, as well as a sample of the data in the arrays.
 There are 3 dimensions: time, latitude and longitude (in that sequence - the sequence is important!). 
-To make a 2-D plot, we will choose the first (0th) time step: 
+To make a 2-D plot, we will choose the first (element 0) time step: 
 
 ~~~
 plt.contourf(ds['sst'][0,:,:])
@@ -167,8 +210,8 @@ Things to note:
 and especially good for plotting gridded environmental data. 
 2. The `[0,:,:]` contruct tells what to do with each dimension of `ds['sst']` in order: [time,lat,lon]. 
   * An integer (or variable containing an integer) specifies one index value for that dimension.
-  * A : by itself means the entire range.
-  * Sub-ranges are specified with a mix of integers and colons, e.g.: `1:` means all but the 0th element, 
+  * `:` by itself means the entire range.
+  * Sub-ranges are specified with a mix of integers and colons, e.g.: just like with lists, `1:` means all but the 0th element, 
     `2:5` would include elements 2-4 (remember it is "up to but not including" the last number).
   * A second colon could be used to indicate the step, e.g., :10:2 would include elements 0,2,4,6,8 (but not 10).
 3. The map is upside down! That is because although there are latitudes and longitudes 
@@ -187,7 +230,8 @@ What does that indexing mean?
 * The first `-1` means the last element in the latitude dimension. 
 Negative indices are a shortcut to counting from the back instead of the front. 
 The next-to-last element would be -2, etc.
-* The second `-1` is the step. `-1::-1` means start at the back and count toward the front (in this case, start in the south and count north) by ones.
+* Nothing between the two colons means _proceed to the end_, which in this case will be the _beginning_!
+* The second `-1` is the step. `-1::-1` means count backwards (in this case, start in the south and count north) by ones.
 
 
 > ### The question mark, and `<tab><tab>`
