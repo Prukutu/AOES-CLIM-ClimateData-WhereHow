@@ -41,9 +41,9 @@ dd = xr.open_dataset(url)
 ~~~
 {: .language-python}
 
-This probably took a few seconds, whereas opening the local file was nearly instantaneous. 
+This may have taken a few seconds, whereas opening the local file was nearly instantaneous. 
 There was some communication over the Internet to establish a link between your Python process 
-running in a Jupyter Notebook on the COLA computer and the remote data server (which sits in Boulder, Colorado).
+running in a Jupyter Notebook on Hopper and the remote data server (which sits in Boulder, Colorado).
 
 As before, query the new object `dd` by typing its name and `<return>`:
   
@@ -88,7 +88,7 @@ Let's go back to our terminal window and copy the following file to your scratch
 
 ~~~
 $ cd /scratch/<your_username>
-$ cp /shared/working/rean/era-interim/daily/data/2014/ei.oper.an.pl.regn128cm.2014020800 test.grb
+$ cp /home/pdirmeye/classes/clim680_2022/ei.oper.an.pl.regn128cm.2014020800 test.grb
 ~~~
 {: .language-bash}
 
