@@ -133,13 +133,15 @@ Before we start, we need to install a bit of software that will help `xarray` in
 In the first code cell, type and run the following:
 
 ~~~
-pip install cftime netcdf4 pydap
+pip install cftime cfgrib netcdf4 pydap
 ~~~
 {: .language-python}
 
 Once it has all installed, restart your kernel.
 
-You can delete that `pip` line as these packages are now installed in your virtual environment and always available. 
+You can comment out that `pip` line now, 
+as these packages are now installed in your virtual environment and always available. 
+
 Then, type the following three `import` statements:
 
 ~~~
