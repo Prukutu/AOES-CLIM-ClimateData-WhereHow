@@ -133,7 +133,7 @@ Before we start, we need to install a bit of software that will help `xarray` in
 In the first code cell, type and run the following:
 
 ~~~
-pip install cftime cfgrib netcdf4 pydap
+pip install cftime cfgrib netcdf4 pydap ecmwflibs
 ~~~
 {: .language-python}
 
