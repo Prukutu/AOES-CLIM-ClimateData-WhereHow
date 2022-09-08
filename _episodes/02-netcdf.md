@@ -101,12 +101,14 @@ $ ncks -M sst.mon.ltm.1981-2010.nc
 > These commands list the metadata in a human-readable format that is fairly easy to interpret.
 >
 > Find the following information:
+> 
 > 1. The names of the dimension variables in the dataset and the size of each
 > 2. The meaning of each dimension variable
 > 3. The data variables (the ones that vary in both space and time dimensions)
 > 4. What is this a dataset of? (peruse the "global attributes")
 >
 > > ### Solution
+> > 
 > > 1. lon = 180; lat = 89; time = 12; nbnds = 2
 > > 2. lon is longitude (˚E); lat is latitude (˚N); time is months (although that is not terribly obvious from the metadata); nbnds is time boundaries (also a bit mysterious at this point)
 > > 3. sst is sea surface temperature [˚C]; valid_yr_count is the "count of non-missing values used in mean", i.e., number of years of good data used from the 30-year window 1991-2020.
@@ -208,6 +210,7 @@ plt.contourf(ds['sst'][0,:,:])
 {: .language-python}
 
 Things to note:
+
 1. `contourf` is one of the many plotting funtions of [matplotlib.pyplot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.html), 
 and especially good for plotting gridded environmental data. 
 2. The `[0,:,:]` contruct tells what to do with each dimension of `ds['sst']` in order: [time,lat,lon]. 
@@ -229,6 +232,7 @@ plt.contourf(ds['sst'][0,-1::-1,:])
 {: .language-python}
 
 What does that indexing mean? 
+
 * The first `-1` means the last element in the latitude dimension. 
 Negative indices are a shortcut to counting from the back instead of the front. 
 The next-to-last element would be -2, etc.
