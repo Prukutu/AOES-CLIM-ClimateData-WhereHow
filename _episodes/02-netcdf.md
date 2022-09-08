@@ -82,7 +82,7 @@ behaving like `ncdump -h`.
 Returning to that data file you downloaded to your scratch directory... give it a try:
 
 ~~~
-$ ncks -m sst.mon.ltm.1981-2010.nc
+$ ncks -m sst.mon.ltm.1991-2020.nc
 ~~~
 {: .language-bash}
 
@@ -92,7 +92,7 @@ A lot of text is sent to your screen, starting with a list of the `dimensions` o
 To see the global attributes of the dataset itself also, use the `-M` flag:
 
 ~~~
-$ ncks -M sst.mon.ltm.1981-2010.nc
+$ ncks -M sst.mon.ltm.1991-2020.nc
 ~~~
 {: .language-bash}
 
