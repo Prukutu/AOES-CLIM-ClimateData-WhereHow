@@ -180,6 +180,7 @@ For very large or multi-file datasets (`xr.open_mfdataset()` can open multiple f
 You will also be shown how the data are "chunked" - i.e., organized when loaded into computer memory.
 
 Next, let's make a plot of the data. To access the variable `sst` in `ds`, we can either say:
+
 ~~~
 ds.sst
 ~~~
@@ -218,7 +219,7 @@ and especially good for plotting gridded environmental data.
   * `:` by itself means the entire range.
   * Sub-ranges are specified with a mix of integers and colons, e.g.: just like with lists, `1:` means all but the 0th element, 
     `2:5` would include elements 2-4 (remember it is "up to but not including" the last number).
-  * A second colon could be used to indicate the step, e.g., :10:2 would include elements 0,2,4,6,8 (but not 10).
+  * A second colon could be used to indicate the step, e.g., `:10:2` would include elements 0,2,4,6,8 (but not 10).
 3. The map is upside down! That is because although there are latitudes and longitudes 
 associated with the last two dimensions of the array, we did not convey that information to the plotting function. 
 Thus, it treats it like a mathematical array with the origin at the lower left. 
